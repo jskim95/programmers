@@ -1,7 +1,166 @@
 # programmers
 
+<details>
+<summary>sort</summary>
+<div markdown="1">
+
+```
+arr = [1, 3, 7, 5, 21, 13, 44]
+
+1. 오름차순
+arr.sort(function (a,b){ return a-b; }) // [ 1, 3, 5, 7, 13, 21, 44 ]
+
+2. 내림차순
+arr.sort(function (a,b){ return b-a; }) // [ 44, 21, 13, 7, 5, 3, 1 ]
+```
+
+</div>
+</details>
+
+<details>
+<summary>최댓값 최솟값</summary>
+<div markdown="1">
+
+```
+var arr = [1, 2, 3]
+var max = 0;
+var min = 0;
+
+- Number
+max = Math.max(1, 2, 3) // 3
+min = Math.min(1, 2, 3) // 1
+
+- Array
+max = Math.max.apply(null, arr) // 3
+min = Math.min.apply(null, arr) // 1
+```
+
+</div>
+</details>
+
+<details>
+<summary>이차원 배열 초기화</summary>
+<div markdown="1">
+
+```
+arr = [1,2,3]
+col = []
+
+for(var i=0; i<arr.length; i++) {
+  col.push([i])
+}
+
+console.log(col) // [[0],[1],[2]]
+```
+
+</div>
+</details>
+
+<details>
+<summary>최대공약수, 최소공배수</summary>
+- 유클리드 호제법
+<div markdown="1">
+
+```
+
+```
+
+</div>
+</details>
+
+<details>
+<summary>반복문 재귀함수 - count</summary>
+<div markdown="1">
+
+```
+var count = 0;
+while(true)
+```
+
+</div>
+</details>
+
+<details>
+<summary>split</summary>
+<div markdown="1">
+
+```
+
+```
+
+</div>
+</details>
+
+<details>
+<summary>substring</summary>
+<div markdown="1">
+
+```
+
+```
+
+</div>
+</details>
+
+<details>
+<summary>대문자, 소문자</summary>
+<div markdown="1">
+
+```
+
+```
+
+</div>
+</details>
+
+<details>
+<summary>아스키코드</summary>
+<div markdown="1">
+
+```
+
+```
+
+</div>
+</details>
+
+<details>
+<summary>2진수</summary>
+<div markdown="1">
+
+```
+
+```
+
+</div>
+</details>
+
+<details>
+<summary>slice, splice</summary>
+<div markdown="1">
+
+```
+
+```
+
+</div>
+</details>
+
+<details>
+<summary>reverse</summary>
+<div markdown="1">
+
+```
+
+```
+
+</div>
+</details>
+
 ### 막힌 문제
-- lv2(구명보트)
+<details>
+<summary>lv2(구명보트)</summary>
+<div markdown="1">
 
 입력값 〉	[10, 20, 30, 40, 50, 60, 70, 80, 90], 100  
 출력 〉
@@ -29,6 +188,10 @@
 한명 일때  
 
 섬에 한명 남았을때 처리를 다시 생각해봐야 할듯
+
+</div>
+</details>
+
 
 ### lv1 푼 문제
 
@@ -85,6 +248,7 @@
 7. N개의 최소공배수
 8. 다음 큰 숫자
 9. 카펫
+10. 숫자의 표현
 
 ### lv2 질문하기 참고해서 푼문제
 - 카펫(테스트 케이스4,6,7 참고) - 노란색 격자의 가로가 긴 경우로 해결해야됌
