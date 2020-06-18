@@ -83,12 +83,20 @@ console.log(col) // [[0],[1],[2]]
 </details>
 
 <details>
-<summary>반복문 재귀함수 - count</summary>
+<summary>무한루프 빠져나오기</summary>
 <div markdown="1">
 
 ```
 var count = 0;
-while(true)
+while(true) {
+  count++
+  if(count == 10) {
+    return false
+  }
+
+  ... 소스
+
+}
 ```
 
 </div>
