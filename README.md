@@ -107,6 +107,19 @@ while(true) {
 <div markdown="1">
 
 ```
+문자열을 특정 기준에 맞게 배열로 바꿔주는 함수
+
+var a = "helloWorld"
+var b = "h e l l o W o r l d"
+var c = "h-e-l-l-o-W-o-r-l-d"
+
+var aa = a.split("")
+var bb = b.split(" ")
+var cc = c.split("-")
+
+console.log(aa) // 	[ 'h', 'e', 'l', 'l', 'o', 'W', 'o', 'r', 'l', 'd' ]
+console.log(bb) // 	[ 'h', 'e', 'l', 'l', 'o', 'W', 'o', 'r', 'l', 'd' ]
+console.log(cc) // 	[ 'h', 'e', 'l', 'l', 'o', 'W', 'o', 'r', 'l', 'd' ]
 
 ```
 
