@@ -227,6 +227,64 @@ console.log(cc) // 	[ 'h', 'e', 'l', 'l', 'o', 'W', 'o', 'r', 'l', 'd' ]
 </div>
 </details>
 
+<details>
+<summary>lv2(가장큰수)</summary>
+<div markdown="1">
+
+```
+막힌 부분numbers에 있는 값을cal 변수에 2차원 배열로 넣었는데 그이후에 막힘
+ex)
+<!-- numbers = [12, 24, 33, 1, 51]
+cal = [[1, 2], [2, 4], [3, 3], [1], [5, 1]]
+이 상태에서 cal[i][0]이 큰 수를 가장 우선으로 answer변수에 넣고
+만약 cal[i][0]와 cal[i+1][0]이 같은경우에는
+반복문을 통해 큰수를 찾으려고 하는데 머리가 막힘 -->
+
+function solution(numbers) {
+    var answer = '';
+    var cal = []
+    var a = numbers.sort().reverse().join(" ")
+    var num = 0
+    for(var i=0; i<numbers.length; i++) {
+        cal.push([])
+        for(var j=num; j<a.length; j++) {
+            if(a[j] !== " ") {
+                cal[i].push(a[j])
+                num++
+            } else {
+                num++
+                break;
+            }
+        }
+    }
+
+    console.log(a)
+    console.log(cal)
+    var count = 0;
+    while(cal.length>0) {
+        count++
+        if(count == 10) {
+            break;
+        }
+        for(var i=0; i<cal.length; i++) {
+            if(i < cal.length-1 &&cal[i][0] > cal[i+1][0]) {
+                answer += cal[i]
+                cal.shift()
+                break;
+            } else {
+                answer += cal[i+1]
+                break;
+            }
+        }
+    }
+    console.log(answer)
+
+    return answer;
+}
+```
+
+</div>
+</details>
 
 ### lv1 푼 문제
 
