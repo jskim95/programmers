@@ -286,6 +286,38 @@ function solution(numbers) {
 </div>
 </details>
 
+<details>
+<summary>lv2(타겟 넘버)</summary>
+<div markdown="1">
+
+```
+function solution(numbers, target) {
+    var answer = 0;
+    for(var i=0; i<numbers.length; i++) {
+        var cal = 0;
+        for(var j=0; j<numbers.length; j++) {
+            if(cal > target) {
+                cal -=  numbers[j]
+                continue;
+            }
+            if(cal <= target) {
+                cal += numbers[j]
+                if(cal == target) {
+                    continue;
+                }
+            }
+        }
+        if(cal==target && j==numbers.length) {
+            answer++
+        }
+    }
+    return answer;
+}
+```
+
+</div>
+</details>
+
 ### lv1 푼 문제
 
 #### 일반
