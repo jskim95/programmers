@@ -231,7 +231,7 @@ console.log(cc) // 	[ 'h', 'e', 'l', 'l', 'o', 'W', 'o', 'r', 'l', 'd' ]
 <summary>lv2(가장큰수)</summary>
 <div markdown="1">
 
-```
+``` javascript
 막힌 부분numbers에 있는 값을cal 변수에 2차원 배열로 넣었는데 그이후에 막힘
 ex)
 <!-- numbers = [12, 24, 33, 1, 51]
@@ -290,7 +290,7 @@ function solution(numbers) {
 <summary>lv2(타겟 넘버)</summary>
 <div markdown="1">
 
-```
+``` javascript
 function solution(numbers, target) {
     var answer = 0;
     for(var i=0; i<numbers.length; i++) {
@@ -311,6 +311,49 @@ function solution(numbers, target) {
             answer++
         }
     }
+    return answer;
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>lv2(스킬 트리)</summary>
+<div markdown="1">
+
+
+``` javascript
+// 순서는 뽑았는데 [0,1,2,0] [1,3,4] 순서를 못구하겠음
+function solution(skill, skill_trees) {
+    var answer = 0;
+
+
+        for(var i=0; i<skill_trees.length; i++) {
+            var a = []
+            for(var q=0; q<skill.length; q++) {
+                a.push(0)
+            }
+            for(var j=0; j<skill_trees[i].length; j++) {
+                for(var k=0; k<skill.length; k++) {
+                    if(skill[k] == skill_trees[i][j]) {
+                        a[k] = j+1
+
+                    }
+                }
+            }
+            console.log(a, i, j, k)
+            answer++
+            for(var w=0; w<a.length; w++) {
+                if(w<a.length-1 && a[w]>a[w+1]) {
+                    answer--
+                    break;
+                }
+            }
+
+        }
+
+
     return answer;
 }
 ```
@@ -374,6 +417,7 @@ function solution(numbers, target) {
 8. 다음 큰 숫자
 9. 카펫
 10. 숫자의 표현
+11. 다리를 지나는 트럭
 
 ### lv2 질문하기 참고해서 푼문제
 - 카펫(테스트 케이스4,6,7 참고) - 노란색 격자의 가로가 긴 경우로 해결해야됌
