@@ -4,7 +4,7 @@
 <summary>sort</summary>
 <div markdown="1">
 
-```
+``` javascript
 arr = [1, 3, 7, 5, 21, 13, 44]
 
 1. 오름차순
@@ -21,7 +21,7 @@ arr.sort(function (a,b){ return b-a; }) // [ 44, 21, 13, 7, 5, 3, 1 ]
 <summary>최댓값 최솟값</summary>
 <div markdown="1">
 
-```
+``` javascript
 var arr = [1, 2, 3]
 var max = 0;
 var min = 0;
@@ -42,7 +42,7 @@ min = Math.min.apply(null, arr) // 1
 <summary>이차원 배열 초기화</summary>
 <div markdown="1">
 
-```
+``` javascript
 arr = [1,2,3]
 col = []
 
@@ -86,7 +86,7 @@ console.log(col) // [[0],[1],[2]]
 <summary>무한루프 빠져나오기</summary>
 <div markdown="1">
 
-```
+``` javascript
 var count = 0;
 while(true) {
   count++
@@ -106,8 +106,8 @@ while(true) {
 <summary>split</summary>
 <div markdown="1">
 
-```
-문자열을 특정 기준에 맞게 배열로 바꿔주는 함수
+``` javascript
+// 문자열을 특정 기준에 맞게 배열로 바꿔주는 함수
 
 var a = "helloWorld"
 var b = "h e l l o W o r l d"
@@ -354,6 +354,38 @@ function solution(skill, skill_trees) {
         }
 
 
+    return answer;
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>lv2(프린터)</summary>
+<div markdown="1">
+
+``` javascript
+function solution(priorities, location) {
+    var answer = 0;
+    var count = 0;
+    while(true) {
+        var max = Math.max.apply(null, priorities)
+        count++
+        if(count == 10) {
+            break;
+        }
+        if(priorities[location] == max) {
+            return answer += 1
+        }
+        for(var i=priorities[location]; i<priorities.length; i++) {
+            if(priorities[location] < priorities[i]) {
+                answer += priorities.length-i
+                priorities.splice(i, priorities.length-i)
+                console.log(priorities)
+            }
+        }
+    }
     return answer;
 }
 ```
