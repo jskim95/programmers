@@ -127,6 +127,31 @@ console.log(cc) // 	[ 'h', 'e', 'l', 'l', 'o', 'W', 'o', 'r', 'l', 'd' ]
 </details>
 
 <details>
+<summary>얕은복사, 깊은복사</summary>
+<div markdown="1">
+
+``` javascript
+// 얕은 복사 -> 기존 배열에 영향을 끼침
+// 깊은 복사 -> 기존 배열에 영향을 안끼침
+var a = [12, 2, 34, 4] // 기존 배열
+var b = a // 얕은 복사
+var c = Array.from(a) // 깊은 복사
+
+a.reverse() // 기존 배열 변경
+c.push(123123) // 깊은 복사한 배열 변경
+
+console.log(a) // 기존 배열
+console.log(b) // 얕은 복사
+console.log(c) // 깊은 복사
+```
+
+</div>
+</details>
+
+</div>
+</details>
+
+<details>
 <summary>substring</summary>
 <div markdown="1">
 
@@ -196,6 +221,7 @@ console.log(cc) // 	[ 'h', 'e', 'l', 'l', 'o', 'W', 'o', 'r', 'l', 'd' ]
 <details>
 <summary>lv2(구명보트)</summary>
 <div markdown="1">
+!! 한명 남았을때 반복문이랑 함수에서 못빠져나옴
 
 입력값 〉	[10, 20, 30, 40, 50, 60, 70, 80, 90], 100  
 출력 〉
@@ -384,6 +410,45 @@ function solution(priorities, location) {
                 priorities.splice(i, priorities.length-i)
                 console.log(priorities)
             }
+        }
+    }
+    return answer;
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>lv2(위장)</summary>
+<div markdown="1">
+
+``` javascript
+function solution(clothes) {
+    var answer = clothes.length;
+    var hash = {};
+    var tail = [];
+    var sum = [];
+
+    for(var i=0; i<clothes.length; i++) {
+        tail = null;
+        for(var j=0; j<clothes[i].length; j++) {
+            var value = clothes[i][1]
+            if(tail != value) {
+                if(!hash[value]) {
+                    hash[value] = 1
+                } else {
+                    hash[value]++
+                }
+            }
+            tail = value
+        }
+    }
+    console.log(hash)
+    if(Object.keys(hash).length>1) {
+        var cal = [];
+        for(var value in hash) {
+            cal[value] = hash[]
         }
     }
     return answer;
