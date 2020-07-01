@@ -458,6 +458,55 @@ function solution(clothes) {
 </div>
 </details>
 
+<details>
+<summary>lv1(실패율)</summary>
+<div markdown="1">
+
+``` javascript
+// 실패율은 구함
+// 실패율을 내림차순 정렬하는거 공부하고 다시 풀기
+
+function solution(N, stages) {
+    var answer = [];
+    var cal = [];
+    var result = [];
+    stages.sort()
+    for(var i=0; i<N; i++) {
+        if(i<N) {
+            cal.push([])
+        }   
+        for(var j=0; j<stages.length; j++) {
+            if(i+1 == stages[j]) {
+                cal[i].push(stages[j])
+            }
+        }
+    }
+    console.log(cal)
+    var len = stages.length
+    var hash = {}
+    for(var i=0; i<cal.length; i++) {
+        answer.push(cal[i].length/len)
+        len = len-cal[i].length
+    }
+
+
+    for(var j=0; j<answer.length; j++) {
+        var max = Math.max.apply(null,answer)
+        if(max == answer[j]) {      
+            result.push(j+1)
+            answer[j] = 0
+            console.log(answer, result)
+        }
+    }       
+
+    console.log(result)
+    return answer;
+}
+```
+
+</div>
+</details>
+
 ### lv1 푼 문제
 
 #### 일반
