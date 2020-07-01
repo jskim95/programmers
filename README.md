@@ -507,6 +507,73 @@ function solution(N, stages) {
 </div>
 </details>
 
+<details>
+<summary>lv2(영어 끝말잇기)</summary>
+<div markdown="1">
+
+``` javascript
+
+function solution(n, words) {
+    var answer = [1, 1]; // 끝말잇기 시작할때 순서, 차례 초기값 설정
+    var countTurn = -1; // 0부터 시작하면 차례가 초기화 제대로 안되서 -1부터 시작
+    var countPeople = 0;
+    // 모든사람 순서 돌았을때 차례,순번 초기화 함수
+    function reset() {
+        answer[1]++
+        countTurn = 0
+        countPeople = 1
+    }
+
+    for(var i=0; i<words.length-1; i++) {
+        countTurn++
+        countPeople++
+        var last = words[i].length-1 // 해당 단어 마지막 글자
+
+        if(countTurn == n) {
+            reset()
+        }
+        // console.log(i, answer, countTurn, countPeople)
+        if(words[i][last] == words[i+1][0]) {
+            for(var j=0; j<=i-1; j++) {
+                //  해당 순서 사람이 중복단어를 말했을 경우
+                // (i!= j) 하는 이유는 다른 순서에서 중복 단어를 사용했는지 체크하기 위해서
+                if(words[i] == words[j] && i!==j) {
+                    answer[0] = countPeople
+                    return answer
+                //  해당 순서 다음 사람이 중복단어를 말했을 경우
+                } else if(words[i+1] == words[j] && i!==j) {
+                    countTurn++
+                    countPeople++
+                    if(countTurn == n) {
+                        reset()
+                        return answer
+                    } else {
+                        answer[0] = countPeople
+                        return answer
+                    }
+                }
+            }
+        // 다음 사람이 끝말잇기를 틀렷을 경우
+        } else if(words[i][last] !== words[i+1][0]) {
+            countTurn++
+            countPeople++
+            if(countTurn == n) {
+                reset()
+            }
+            return answer
+        }         
+    }
+    // 끝까지 아무도 안틀렷을 경우
+    answer[0] = 0
+    answer[1] = 0
+    return answer
+}
+
+```
+
+</div>
+</details>
+
 ### lv1 푼 문제
 
 #### 일반
