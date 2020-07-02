@@ -152,6 +152,35 @@ console.log(c) // 깊은 복사
 </details>
 
 <details>
+<summary>올림,버림,반올림</summary>
+<div markdown="1">
+
+``` javascript
+1.올림
+Math.ceil(변수)
+
+2.버림
+Math.floor(변수)
+
+3.반올림
+Math.round(변수)
+
+4.소숫점길이 만큼 반올림
+변수.toString(소숫점길이)
+
+var num = 99.555
+console.log(Math.ceil(num)) // 100
+console.log(Math.floor(num)) // 99
+console.log(Math.round(num)) // 100
+console.log(num.toFixed(2)) // 99.56
+
+
+```
+
+</div>
+</details>
+
+<details>
 <summary>substring</summary>
 <div markdown="1">
 
@@ -459,55 +488,6 @@ function solution(clothes) {
 </details>
 
 <details>
-<summary>lv1(실패율)</summary>
-<div markdown="1">
-
-``` javascript
-// 실패율은 구함
-// 실패율을 내림차순 정렬하는거 공부하고 다시 풀기
-
-function solution(N, stages) {
-    var answer = [];
-    var cal = [];
-    var result = [];
-    stages.sort()
-    for(var i=0; i<N; i++) {
-        if(i<N) {
-            cal.push([])
-        }   
-        for(var j=0; j<stages.length; j++) {
-            if(i+1 == stages[j]) {
-                cal[i].push(stages[j])
-            }
-        }
-    }
-    console.log(cal)
-    var len = stages.length
-    var hash = {}
-    for(var i=0; i<cal.length; i++) {
-        answer.push(cal[i].length/len)
-        len = len-cal[i].length
-    }
-
-
-    for(var j=0; j<answer.length; j++) {
-        var max = Math.max.apply(null,answer)
-        if(max == answer[j]) {      
-            result.push(j+1)
-            answer[j] = 0
-            console.log(answer, result)
-        }
-    }       
-
-    console.log(result)
-    return answer;
-}
-```
-
-</div>
-</details>
-
-<details>
 <summary>lv2(영어 끝말잇기)</summary>
 <div markdown="1">
 
@@ -602,6 +582,46 @@ function solution(s)
 </div>
 </details>
 
+<details>
+<summary>lv2(H-Index)</summary>
+<div markdown="1">
+
+``` javascript
+// 11번케이스가 뭔지 모르겠음  
+// 1. 모든 논문 인용0회일때 return 0처리  
+// 2. h최댓값 처리함  
+// 
+// 아마 논문수 1000편이하를 이용하면 될듯  
+
+function solution(citations) {
+    var answer = 0;
+    var count = -1;
+    while(true) {
+        count++
+        var h = 0;
+        var max = Math.max(...citations)
+        if(max == 0) {
+            return 0
+        } else if(max == count) {
+            return count
+        }
+
+        for(var i=0; i<citations.length; i++) {
+            if(citations[i] >= count) {
+                h++
+            }
+        }
+        if(count == h) {
+            return h
+        }
+    }
+    return answer;
+}
+```
+
+</div>
+</details>
+
 ### lv1 푼 문제
 
 #### 일반
@@ -641,11 +661,13 @@ function solution(s)
 1. 예산
 2. 크레인 인형뽑기 게임
 3. [1차] 비밀지도
+4. 실패율
 
 ### lv1 질문하기 참고해서 푼문제
 - 모의고사
 - 체육복
 - 최대 공약수와 최소공배수(유클리드 호제법 참고)
+- 실패율 - 테스트케이스 참고
 
 ### lv2 푼 문제
 1. 기능개발
@@ -659,7 +681,10 @@ function solution(s)
 9. 카펫
 10. 숫자의 표현
 11. 다리를 지나는 트럭
+12. 예상 대진표
+13. 점프와 순간 이동
 
 ### lv2 질문하기 참고해서 푼문제
 - 카펫(테스트 케이스4,6,7 참고) - 노란색 격자의 가로가 긴 경우로 해결해야됌
 - 짝지어 제거하기 - 스택으로 풀면 O(N)으로 풀수있다고 질문하기에서 봄
+- H-Index - 테스트 케이스 참고
