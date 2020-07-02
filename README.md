@@ -574,6 +574,34 @@ function solution(n, words) {
 </div>
 </details>
 
+<details>
+<summary>lv2(짝지어 제거하기)</summary>
+<div markdown="1">
+
+``` javascript
+function solution(s)
+{
+    var answer = 0;
+    var cal = s.split("")
+    for(var i=cal.length-1; i>0; i--) {
+
+        if(cal[i-1] == cal[i]) {
+            cal.splice(i-1, 2)
+        }
+    }
+    if(cal.length ==0) {
+        return 1
+    } else {
+        return 0
+    }
+
+    return answer;
+}
+```
+
+</div>
+</details>
+
 ### lv1 푼 문제
 
 #### 일반
@@ -634,3 +662,4 @@ function solution(n, words) {
 
 ### lv2 질문하기 참고해서 푼문제
 - 카펫(테스트 케이스4,6,7 참고) - 노란색 격자의 가로가 긴 경우로 해결해야됌
+- 짝지어 제거하기 - 스택으로 풀면 O(N)으로 풀수있다고 질문하기에서 봄
