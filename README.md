@@ -662,6 +662,46 @@ function solution(citations) {
 </div>
 </details>
 
+<details>
+<summary>lv2(올바른 괄호)</summary>
+<div markdown="1">
+
+``` javascript
+// 효율성 실패
+// again함수 안에 반복문 스택으로 풀어보자
+
+function solution(s){
+    var answer = true;
+    var total = []
+    for(var i=0; i<s.length; i++) {
+        total.push(s[i])
+    }
+
+    function again(total) {
+
+        for(var j=0; j<total.length; j++) {
+            if(total[j] ==="(" && total[j+1] ===")") {
+                total.splice(j,2)
+                again(total)
+            }
+
+        }
+        if(total.length<1) {
+            return answer = true
+        } else {
+            return answer = false
+        }
+
+
+    }
+    again(total)
+    return answer;
+}
+```
+
+</div>
+</details>
+
 ### lv1 푼 문제
 
 #### 일반
@@ -723,6 +763,7 @@ function solution(citations) {
 11. 다리를 지나는 트럭
 12. 예상 대진표
 13. 점프와 순간 이동
+14. 행렬의 곱셈
 
 ### lv2 질문하기 참고해서 푼문제
 - 카펫(테스트 케이스4,6,7 참고) - 노란색 격자의 가로가 긴 경우로 해결해야됌
