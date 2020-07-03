@@ -336,6 +336,46 @@ function solution(numbers) {
 
     return answer;
 }
+
+// 2차 시도
+function solution(numbers) {
+    var answer = '';
+    var a = numbers.join(",")
+    var cal = []
+
+    for(var i=0; i<numbers.length; i++) {
+        cal.push([])
+        for(var j=0; j<a.length; j++) {
+            if(a[j]*1 >=0 ) {
+                cal[i].push(a[j])
+            } else {
+                a = a.substr(j+1)
+                break;
+            }
+        }
+    }
+    cal.sort().reverse()
+
+    for(var i=0; i<cal.length-1; i++) {
+        for(var j=0; j<cal[i].length-1; j++) {
+            if(cal[i][j] == cal[i+1][j] && cal[i][j+1]<cal[i+1][j]) {  
+                var temp = cal[i]
+                cal[i] = cal[i+1]
+                cal[i+1] = temp
+            }
+        }
+        answer += cal[i]
+    }
+    answer += cal[i]
+    var result = ''
+    for(var i=0; i<answer.length; i++) {
+        if(answer[i]*1 >=0) {
+            result += answer[i]
+        }
+    }
+    console.log(typeof result)
+    return result;
+}
 ```
 
 </div>
@@ -590,7 +630,7 @@ function solution(s)
 // 11번케이스가 뭔지 모르겠음  
 // 1. 모든 논문 인용0회일때 return 0처리  
 // 2. h최댓값 처리함  
-// 
+//
 // 아마 논문수 1000편이하를 이용하면 될듯  
 
 function solution(citations) {
