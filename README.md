@@ -279,6 +279,39 @@ console.log(num.toFixed(2)) // 99.56
 
 섬에 한명 남았을때 처리를 다시 생각해봐야 할듯
 
+
+``` javascript
+// 2차 시도
+function solution(people, limit) {
+    var answer = 0;
+    var index = 0;
+    people.sort(...people)
+
+        while(true) {
+            index++
+            if(people.length == 0) {
+                break;
+            }
+            if(people.length == 1) {
+                answer++
+                break;
+            }
+
+            if(people[0]+people[people.length-index] <= limit && people.length-index>0) {
+                console.log('두명씩', people, index)
+                answer += index
+                people.splice(people.length-index, index)
+                people.shift()            
+                index = 0
+            } else if(index>people.length && people.length !== 1) {
+                // console.log('혼자씩', people)
+                answer += people.length
+                break;
+            }   
+        }
+    return answer;
+}
+```
 </div>
 </details>
 
@@ -813,3 +846,4 @@ function solution(number, k) {
 - 짝지어 제거하기 - 스택으로 풀면 O(N)으로 풀수있다고 질문하기에서 봄
 - H-Index - 테스트 케이스 참고
 - 큰 수 만들기 - 테스트 케이스 참고
+- 구명보트 - 테스트 케이스 참고
