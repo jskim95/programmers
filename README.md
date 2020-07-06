@@ -776,6 +776,64 @@ function solution(number, k) {
 </div>
 </details>
 
+<details>
+<summary>lv2(튜플)</summary>
+<div markdown="1">
+
+``` javascript
+// 0번째 인덱스는 못꺼내옴
+// 2자리 숫자 이상도 못꺼내옴
+
+// [ '4', ',', '2', ',', '3', ',', '3', ',', '2', ',', '3', ',', '4', ',', '1' ]
+// [ 3, 2, 1 ]
+// [ '4', ',', '2', ',', '3', ',', '3', ',', '2', ',', '3', ',', '4' ]
+// [ 3, 2, 1, 4 ]
+// [ '4', ',', '2', ',', '3', ',', '3', ',', '2', ',', '3' ]
+// [ 3, 2, 1, 4, 3 ]
+// [ '4', ',', '2', ',', '3', ',', '3', ',', '2' ]
+// [ 3, 2, 1, 4, 3, 2 ]
+// [ '4', ',', '2', ',', '3', ',', '3' ]
+// [ 3, 2, 1, 4, 3, 2, 3 ]
+// [ '4', ',', '2', ',', '3' ]
+// [ 3, 2, 1, 4, 3, 2, 3, 3 ]
+// [ '4', ',', '2' ]
+// [ 3, 2, 1, 4, 3, 2, 3, 3, 2 ]
+
+function solution(s) {
+    var answer = [];
+    var count = 0;
+    var arr = s.split('')
+    for(var i=arr.length-1; i>=0; i--) {
+        if(arr[i] == '{' || arr[i] == '}') {
+            arr.splice(i,1)
+        }
+    }
+
+    for(var i=arr.length-1; i>=0; i--) {
+        if(arr[i]*0 == 0) {
+            count++
+            continue;
+        } else {
+            var a = arr.splice(i+1)
+            console.log(arr)
+            answer.push(a*1)
+            arr.splice(i,1)
+        }
+        if(i == 0) {
+            console.log('여기')
+            var b = arr.splice(0)
+            answer.push(b*1)
+        }
+
+    }
+
+    return answer;
+}
+
+```
+
+</div>
+</details>
 
 
 ### lv1 푼 문제
