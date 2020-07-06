@@ -697,10 +697,53 @@ function solution(s){
     again(total)
     return answer;
 }
+
 ```
 
 </div>
 </details>
+
+<details>
+<summary>lv2(큰 수 만들기)</summary>
+<div markdown="1">
+
+``` javascript
+// 10번 테스트케이스 시간초과
+// 마지막 arr.join("")이 시간이 오래 걸리는거 같음
+function solution(number, k) {
+    var answer = '';
+    var count = 0;
+    var stop = 0;
+    var arr = number.split("")
+
+    while(k>0) {
+        stop++
+        if(count == k) {
+            break;
+        } else if(stop > k) {
+            var num = k-count
+            var a = arr.splice(arr.length-num, num)
+            break;
+        }
+
+        for(var i=0; i<arr.length-1; i++) {
+            if(arr[i]<arr[i+1]) {
+                count++
+                arr.splice(i,1)
+                break;
+            }
+        }
+    }
+    answer = arr.join("")
+    return answer;
+}
+
+```
+
+</div>
+</details>
+
+
 
 ### lv1 푼 문제
 
@@ -769,3 +812,4 @@ function solution(s){
 - 카펫(테스트 케이스4,6,7 참고) - 노란색 격자의 가로가 긴 경우로 해결해야됌
 - 짝지어 제거하기 - 스택으로 풀면 O(N)으로 풀수있다고 질문하기에서 봄
 - H-Index - 테스트 케이스 참고
+- 큰 수 만들기 - 테스트 케이스 참고
