@@ -247,73 +247,7 @@ console.log(num.toFixed(2)) // 99.56
 </details>
 
 ### 막힌 문제
-<details>
-<summary>lv2(구명보트)</summary>
-<div markdown="1">
-!! 한명 남았을때 반복문이랑 함수에서 못빠져나옴
 
-입력값 〉	[10, 20, 30, 40, 50, 60, 70, 80, 90], 100  
-출력 〉
-
-배 갯수 : 0,   
-남은 사람 몸무게: 10,20,30,40,50,60,70,80,90,  
-최댓값+최솟값<무게제한 일대 까지 최댓값 감소하는 index : 1
-
-배 갯수 : 1,  
-남은 사람 몸무게: 20,30,40,50,60,70,80,  
-최댓값+최솟값<무게제한 일대 까지 최댓값 감소하는 index : 1
-
-배 갯수 : 2,  
-남은 사람 몸무게: 30,40,50,60,70,  
-최댓값+최솟값<무게제한 일대 까지 최댓값 감소하는 index : 1
-
-배 갯수 : 3,
-남은 사람 몸무게: 40,50,60,  
-최댓값+최솟값<무게제한 일대 까지 최댓값 감소하는 index : 1
-
-한명 일때  
-한명 일때  
-한명 일때  
-한명 일때  
-한명 일때  
-
-섬에 한명 남았을때 처리를 다시 생각해봐야 할듯
-
-
-``` javascript
-// 2차 시도
-function solution(people, limit) {
-    var answer = 0;
-    var index = 0;
-    people.sort(...people)
-
-        while(true) {
-            index++
-            if(people.length == 0) {
-                break;
-            }
-            if(people.length == 1) {
-                answer++
-                break;
-            }
-
-            if(people[0]+people[people.length-index] <= limit && people.length-index>0) {
-                console.log('두명씩', people, index)
-                answer += index
-                people.splice(people.length-index, index)
-                people.shift()            
-                index = 0
-            } else if(index>people.length && people.length !== 1) {
-                // console.log('혼자씩', people)
-                answer += people.length
-                break;
-            }   
-        }
-    return answer;
-}
-```
-</div>
-</details>
 
 <details>
 <summary>lv2(가장큰수)</summary>
@@ -627,73 +561,9 @@ function solution(n, words) {
 </div>
 </details>
 
-<details>
-<summary>lv2(짝지어 제거하기)</summary>
-<div markdown="1">
 
-``` javascript
-function solution(s)
-{
-    var answer = 0;
-    var cal = s.split("")
-    for(var i=cal.length-1; i>0; i--) {
 
-        if(cal[i-1] == cal[i]) {
-            cal.splice(i-1, 2)
-        }
-    }
-    if(cal.length ==0) {
-        return 1
-    } else {
-        return 0
-    }
 
-    return answer;
-}
-```
-
-</div>
-</details>
-
-<details>
-<summary>lv2(H-Index)</summary>
-<div markdown="1">
-
-``` javascript
-// 11번케이스가 뭔지 모르겠음  
-// 1. 모든 논문 인용0회일때 return 0처리  
-// 2. h최댓값 처리함  
-//
-// 아마 논문수 1000편이하를 이용하면 될듯  
-
-function solution(citations) {
-    var answer = 0;
-    var count = -1;
-    while(true) {
-        count++
-        var h = 0;
-        var max = Math.max(...citations)
-        if(max == 0) {
-            return 0
-        } else if(max == count) {
-            return count
-        }
-
-        for(var i=0; i<citations.length; i++) {
-            if(citations[i] >= count) {
-                h++
-            }
-        }
-        if(count == h) {
-            return h
-        }
-    }
-    return answer;
-}
-```
-
-</div>
-</details>
 
 <details>
 <summary>lv2(올바른 괄호)</summary>
@@ -776,57 +646,74 @@ function solution(number, k) {
 </div>
 </details>
 
+
+
+### 막혔던 문제
+
+<details>
+<summary>lv2(구명보트)</summary>
+<div markdown="1">
+
+``` javascript
+// 못푼 이유
+// people배열 sort할 때 정렬이 제대로 되지않아서
+// 로직은 수정 안해도 되지만 실패가 많이 나옴
+
+// 해결법
+// people.sort(function(a,b) {
+//     return a-b
+// })
+
+// 틀린 코드
+function solution(people, limit) {
+    var answer = 0;
+    var index = 0;
+    people.sort(...people)
+
+        while(true) {
+            index++
+            if(people.length == 0) {
+                break;
+            }
+            if(people.length == 1) {
+                answer++
+                break;
+            }
+
+            if(people[0]+people[people.length-index] <= limit && people.length-index>0) {
+                answer += index
+                people.splice(people.length-index, index)
+                people.shift()            
+                index = 0
+            } else if(index>people.length && people.length !== 1) {
+                answer += people.length
+                break;
+            }   
+        }
+    return answer;
+}
+```
+</div>
+</details>
+
 <details>
 <summary>lv2(튜플)</summary>
 <div markdown="1">
 
 ``` javascript
-// 0번째 인덱스는 못꺼내옴
-// 2자리 숫자 이상도 못꺼내옴
+// 못푼 이유
 
-// [ '4', ',', '2', ',', '3', ',', '3', ',', '2', ',', '3', ',', '4', ',', '1' ]
-// [ 3, 2, 1 ]
-// [ '4', ',', '2', ',', '3', ',', '3', ',', '2', ',', '3', ',', '4' ]
-// [ 3, 2, 1, 4 ]
-// [ '4', ',', '2', ',', '3', ',', '3', ',', '2', ',', '3' ]
-// [ 3, 2, 1, 4, 3 ]
-// [ '4', ',', '2', ',', '3', ',', '3', ',', '2' ]
-// [ 3, 2, 1, 4, 3, 2 ]
-// [ '4', ',', '2', ',', '3', ',', '3' ]
-// [ 3, 2, 1, 4, 3, 2, 3 ]
-// [ '4', ',', '2', ',', '3' ]
-// [ 3, 2, 1, 4, 3, 2, 3, 3 ]
-// [ '4', ',', '2' ]
-// [ 3, 2, 1, 4, 3, 2, 3, 3, 2 ]
+// [3, 2, 4, 1] => 답
+// [ 3, 2, 1, 4, 3, 2, 3, 3, 2, 4 ] => 내가 만든 배열
+// 위에 배열 처럼 값은 뽑았는데 어떻게 답처럼 정렬을 하는지 해결방법을 몰랐었는데
 
+// 해결법
+// 객체를 이용해서 중복 값을 알맞게 저장함
+
+// 틀린 코드
 function solution(s) {
-    var answer = [];
-    var count = 0;
-    var arr = s.split('')
-    for(var i=arr.length-1; i>=0; i--) {
-        if(arr[i] == '{' || arr[i] == '}') {
-            arr.splice(i,1)
-        }
-    }
-
-    for(var i=arr.length-1; i>=0; i--) {
-        if(arr[i]*0 == 0) {
-            count++
-            continue;
-        } else {
-            var a = arr.splice(i+1)
-            console.log(arr)
-            answer.push(a*1)
-            arr.splice(i,1)
-        }
-        if(i == 0) {
-            console.log('여기')
-            var b = arr.splice(0)
-            answer.push(b*1)
-        }
-
-    }
-
+    var answer = s.replace(/[{}]/g, "").split(',')
+    console.log(answer) // [ 3, 2, 1, 4, 3, 2, 3, 3, 2, 4 ]
     return answer;
 }
 
@@ -835,6 +722,83 @@ function solution(s) {
 </div>
 </details>
 
+<details>
+<summary>lv2(H-Index)</summary>
+<div markdown="1">
+
+``` javascript
+// 못푼 이유
+// 인용횟수 만큼 while문을 돌려서 너무 비효율 적이었고
+// 논문수 1000편이고 인용횟수가 2000일때 h최댓값을 구할수 없음
+
+// 해결법
+// 내림차순하고 0번째 인덱스부터 인용횟수를 index = 0으로 지정하고
+// 반복문을 통해서 index < 내림차순한 배열 값일때 index++ 계속함
+
+// 틀린 코드
+function solution(citations) {
+    var answer = 0;
+    var count = -1;
+    while(true) {
+        count++
+        var h = 0;
+        var max = Math.max(...citations)
+        if(max == 0) {
+            return 0
+        } else if(max == count) {
+            return count
+        }
+
+        for(var i=0; i<citations.length; i++) {
+            if(citations[i] >= count) {
+                h++
+            }
+        }
+        if(count == h) {
+            return h
+        }
+    }
+    return answer;
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>lv2(짝지어 제거하기)</summary>
+<div markdown="1">
+
+``` javascript
+// 못푼 이유
+// 효율성이 안좋음
+
+// 해결법
+// stack을 이용함
+
+// 틀린코드
+function solution(s)
+{
+    var answer = 0;
+    var cal = s.split("")
+    for(var i=cal.length-1; i>0; i--) {
+
+        if(cal[i-1] == cal[i]) {
+            cal.splice(i-1, 2)
+        }
+    }
+    if(cal.length ==0) {
+        return 1
+    } else {
+        return 0
+    }
+
+    return answer;
+}
+```
+
+</div>
+</details>
 
 ### lv1 푼 문제
 
@@ -898,10 +862,20 @@ function solution(s) {
 12. 예상 대진표
 13. 점프와 순간 이동
 14. 행렬의 곱셈
+15. 구명보트
+16. 튜플
+17. H-Index
+18. 짝지어 제거하기
 
 ### lv2 질문하기 참고해서 푼문제
 - 카펫(테스트 케이스4,6,7 참고) - 노란색 격자의 가로가 긴 경우로 해결해야됌
 - 짝지어 제거하기 - 스택으로 풀면 O(N)으로 풀수있다고 질문하기에서 봄
 - H-Index - 테스트 케이스 참고
 - 큰 수 만들기 - 테스트 케이스 참고
-- 구명보트 - 테스트 케이스 참고
+- 구명보트 - 테스트 케이스 참고(배열 정렬할때는 function(a,b) return a-b 하기 그냥 sort하면 안될때도 있음)
+
+
+### lv2 다른 사람 풀이 참고해서 푼문제
+- 튜플 - {} 안의 숫자 갯수를 구하는 부분 참고
+- H-Index - 배열값을 내림차순하고 인용횟수를 이용하는 부분 참고
+- 짝지어 제거하기 - 임시 배열을 만들어서 비교하면서 stack을 이용해서 빼는 부분 참고
