@@ -381,49 +381,6 @@ function solution(numbers, target) {
 </details>
 
 <details>
-<summary>lv2(스킬 트리)</summary>
-<div markdown="1">
-
-
-``` javascript
-// 순서는 뽑았는데 [0,1,2,0] [1,3,4] 순서를 못구하겠음
-function solution(skill, skill_trees) {
-    var answer = 0;
-
-
-        for(var i=0; i<skill_trees.length; i++) {
-            var a = []
-            for(var q=0; q<skill.length; q++) {
-                a.push(0)
-            }
-            for(var j=0; j<skill_trees[i].length; j++) {
-                for(var k=0; k<skill.length; k++) {
-                    if(skill[k] == skill_trees[i][j]) {
-                        a[k] = j+1
-
-                    }
-                }
-            }
-            console.log(a, i, j, k)
-            answer++
-            for(var w=0; w<a.length; w++) {
-                if(w<a.length-1 && a[w]>a[w+1]) {
-                    answer--
-                    break;
-                }
-            }
-
-        }
-
-
-    return answer;
-}
-```
-
-</div>
-</details>
-
-<details>
 <summary>lv2(프린터)</summary>
 <div markdown="1">
 
@@ -565,46 +522,7 @@ function solution(n, words) {
 
 
 
-<details>
-<summary>lv2(올바른 괄호)</summary>
-<div markdown="1">
 
-``` javascript
-// 효율성 실패
-// again함수 안에 반복문 스택으로 풀어보자
-
-function solution(s){
-    var answer = true;
-    var total = []
-    for(var i=0; i<s.length; i++) {
-        total.push(s[i])
-    }
-
-    function again(total) {
-
-        for(var j=0; j<total.length; j++) {
-            if(total[j] ==="(" && total[j+1] ===")") {
-                total.splice(j,2)
-                again(total)
-            }
-
-        }
-        if(total.length<1) {
-            return answer = true
-        } else {
-            return answer = false
-        }
-
-
-    }
-    again(total)
-    return answer;
-}
-
-```
-
-</div>
-</details>
 
 <details>
 <summary>lv2(큰 수 만들기)</summary>
@@ -641,6 +559,50 @@ function solution(number, k) {
     return answer;
 }
 
+```
+
+</div>
+</details>
+
+<details>
+<summary>lv3(베스트앨범)</summary>
+<div markdown="1">
+
+``` javascript
+// 제한 조건
+// 1. 장르 별로 가장 많이 재생된 노래를 두 개씩 모아 베스트 앨범을 출시
+// 2. 속한 노래가 많이 재생된 장르를 먼저 수록합니다.
+// 3. 장르 내에서 많이 재생된 노래를 먼저 수록합니다.
+// 4. 장르 내에서 재생 횟수가 같은 노래 중에서는 고유 번호가 낮은 노래를 먼저 수록합니다.
+
+
+// 장르별 재생횟수 내림차순까지는 만들었는데
+// 베스트 앨범에 2개 혹은 1개씩 return 하는법을 모르겠음
+
+// [ [ 4, 'pop', 2500 ],
+//   [ 3, 'classic', 800 ],
+//   [ 1, 'pop', 600 ],
+//   [ 0, 'classic', 500 ],
+//   [ 2, 'classic', 150 ] ]
+
+function solution(genres, plays) {
+    var answer = [];
+    var arr = [];
+
+    for(var i=0; i<genres.length; i++) {
+        arr.push([])
+        arr[i].push(i)
+        arr[i].push(genres[i])
+        arr[i].push(plays[i])
+    }
+
+    arr.sort(function(a, b) {
+        return b[2] - a[2]
+    })
+
+    console.log(arr)
+    return answer;
+}
 ```
 
 </div>
@@ -800,6 +762,101 @@ function solution(s)
 </div>
 </details>
 
+<details>
+<summary>lv2(올바른 괄호)</summary>
+<div markdown="1">
+
+``` javascript
+// 못푼 이유
+// 효율성 실패
+
+// 해결법
+// 스택 이용
+
+// 틀린 코드
+function solution(s){
+    var answer = true;
+    var total = []
+    for(var i=0; i<s.length; i++) {
+        total.push(s[i])
+    }
+
+    function again(total) {
+
+        for(var j=0; j<total.length; j++) {
+            if(total[j] ==="(" && total[j+1] ===")") {
+                total.splice(j,2)
+                again(total)
+            }
+
+        }
+        if(total.length<1) {
+            return answer = true
+        } else {
+            return answer = false
+        }
+
+
+    }
+    again(total)
+    return answer;
+}
+
+```
+
+</div>
+</details>
+
+<details>
+<summary>lv2(스킬트리)</summary>
+<div markdown="1">
+
+
+``` javascript
+// 못푼 이유
+// 순서는 뽑았는데 [0,1,2,0] [1,3,4] 순서를 못구하겠음
+// skill_trees의 순서 값은 뽑았는데 올바른 스킬 순서인지 구분을 못했음
+
+// 해결법
+// skill_trees의 순서는 무조건 [0,1,2 ...]순서로 나와야된다는걸 깨달음
+
+// 틀린 코드
+function solution(skill, skill_trees) {
+    var answer = 0;
+
+
+        for(var i=0; i<skill_trees.length; i++) {
+            var a = []
+            for(var q=0; q<skill.length; q++) {
+                a.push(0)
+            }
+            for(var j=0; j<skill_trees[i].length; j++) {
+                for(var k=0; k<skill.length; k++) {
+                    if(skill[k] == skill_trees[i][j]) {
+                        a[k] = j+1
+
+                    }
+                }
+            }
+            console.log(a, i, j, k)
+            answer++
+            for(var w=0; w<a.length; w++) {
+                if(w<a.length-1 && a[w]>a[w+1]) {
+                    answer--
+                    break;
+                }
+            }
+
+        }
+
+
+    return answer;
+}
+```
+
+</div>
+</details>
+
 ### lv1 푼 문제
 
 #### 일반
@@ -866,6 +923,8 @@ function solution(s)
 16. 튜플
 17. H-Index
 18. 짝지어 제거하기
+19. 올바른 괄호
+20. 스킬트리
 
 ### lv2 질문하기 참고해서 푼문제
 - 카펫(테스트 케이스4,6,7 참고) - 노란색 격자의 가로가 긴 경우로 해결해야됌
