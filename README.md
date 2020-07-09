@@ -608,6 +608,34 @@ function solution(genres, plays) {
 </div>
 </details>
 
+<details>
+<summary>lv3(멀리 뛰기)</summary>
+<div markdown="1">
+
+``` javascript
+// 순열 조합 공부하고 다시 풀기
+
+function solution(n) {
+    var answer = 1;
+    var count = 0;
+    var double = 2
+    var value = n
+    while(true) {
+        var num = 0;
+        if(value-double>=0) {
+            num = (value-double)%1234567
+            answer += (num+1)%1234567
+        } else {
+            break;
+        }
+        double = (double*2)%1234567
+    }
+    return answer;
+}
+```
+
+</div>
+</details>
 
 
 ### 막혔던 문제
@@ -938,3 +966,7 @@ function solution(skill, skill_trees) {
 - 튜플 - {} 안의 숫자 갯수를 구하는 부분 참고
 - H-Index - 배열값을 내림차순하고 인용횟수를 이용하는 부분 참고
 - 짝지어 제거하기 - 임시 배열을 만들어서 비교하면서 stack을 이용해서 빼는 부분 참고
+
+
+### lv3 질문하기 참고해서 푼 문제
+- 멀리 뛰기 - 테스트 케이스 참고
