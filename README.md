@@ -637,6 +637,47 @@ function solution(n) {
 </div>
 </details>
 
+<details>
+<summary>lv2(오픈채팅방)</summary>
+<div markdown="1">
+
+``` javascript
+// 배열로 접근하니깐 한계를 느낌
+// 객체로 다시 풀어보자.
+
+  // 현재 출력
+  // 'Muzi님이 들어왔습니다.',
+  // 'Prodo님이 들어왔습니다.',
+  // 'Muzi님이 나갔습니다.',
+  // 'Prodo님이 들어왔습니다.'
+
+function solution(record) {
+    var answer = [];
+    var arr = []
+    for(var i=0; i<record.length; i++) {
+        arr.push([])
+        arr[i] = record[i].split(" ")
+    }
+    for(var i=0; i<arr.length; i++) {
+        if(arr[i][0] == 'Enter') {
+            answer.push(arr[i][2]+'님이 들어왔습니다.')
+        } else if(arr[i][0] == 'Leave') {
+            for(var j=0; j<arr.length; j++) {
+                if(arr[i][1] == arr[j][1]) {
+                    answer.push(arr[j][2]+'님이 나갔습니다.')
+                    break;
+                }
+            }
+        }
+    }
+    console.log(arr)
+    return answer;
+}
+```
+
+</div>
+</details>
+
 
 ### 막혔던 문제
 
