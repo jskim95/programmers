@@ -651,33 +651,87 @@ function solution(n) {
   // 'Muzi님이 나갔습니다.',
   // 'Prodo님이 들어왔습니다.'
 
-function solution(record) {
-    var answer = [];
-    var arr = []
-    for(var i=0; i<record.length; i++) {
-        arr.push([])
-        arr[i] = record[i].split(" ")
-    }
-    for(var i=0; i<arr.length; i++) {
-        if(arr[i][0] == 'Enter') {
-            answer.push(arr[i][2]+'님이 들어왔습니다.')
-        } else if(arr[i][0] == 'Leave') {
-            for(var j=0; j<arr.length; j++) {
-                if(arr[i][1] == arr[j][1]) {
-                    answer.push(arr[j][2]+'님이 나갔습니다.')
-                    break;
-                }
-            }
-        }
-    }
-    console.log(arr)
-    return answer;
-}
+  function solution(record) {
+      var answer = '';
+      var arr = [];
+      var obj = {};
+
+      for(var i=0; i<record.length; i++) {
+          arr.push([])
+          arr[i] = record[i].split(" ")
+      }
+      // 들어왔다가 아이디 바꾼 경우 고유 아이디로 구분 해서 바꿔주기
+      // change로 들어왔을때 닉네임 바꾸기
+      // answer = answer.replace(/Muzi/g, arr[i][2]) /Muzi/ 이부분을 변수로 하는법을 모르겠음
+      for(var i=0; i<arr.length; i++) {
+          if(arr[i][0] == 'Enter') {
+              for(var k=0; k<arr.length; k++) {
+                  if(k<i && arr[i][1] == arr[k][1]) {
+                      var temp = arr[k][2]
+                      // console.log(/arr[k][2]/g)
+                      console.log(temp)
+                      answer = answer.replace(/Muzi/g, arr[i][2])
+                      break;
+                  }
+              }
+              answer += arr[i][2]+'님이 들어왔습니다.'
+          } else if(arr[i][0] == 'Leave') {
+              for(var j=0; j<arr.length; j++) {
+                  if(arr[i][1] == arr[j][1]) {
+                      answer += arr[j][2]+'님이 나갔습니다.'
+                      break;
+                  }
+              }
+          }
+      }
+      // console.log(arr)
+      return answer;
+  }
 ```
 
 </div>
 </details>
 
+<details>
+<summary>lv2(124 나라의 숫자)</summary>
+<div markdown="1">
+
+``` javascript
+
+// 1 1     11 42       21 144
+// 2 2     12 44       22 211
+// 3 4     13 111      23 212
+// 4 11    14 112      24 214
+// 5 12    15 114      25 221
+// 6 14    16 121      26 222
+// 7 21    17 122      27 224
+// 8 22    18 124      28 241
+// 9 24    19 141      29 242
+// 10 41   20 142      30 244
+
+function solution(n) {
+    var answer = '';
+    var arr = [4,1,2]
+    if(n<=3) {
+        answer += arr[n%3]
+        return answer
+    }
+    while(true) {
+        answer += arr[n%3]
+        n = Math.floor(n/3)
+        if(Math.floor(n/3) <= 1) {
+            answer += arr[n%3]
+            break;
+        }
+    }
+    var result = answer.split('').reverse().join('')
+    console.log(result)
+    return result;
+}
+```
+
+</div>
+</details>
 
 ### 막혔던 문제
 
