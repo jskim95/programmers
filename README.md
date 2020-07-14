@@ -353,6 +353,7 @@ function solution(numbers) {
 <div markdown="1">
 
 ``` javascript
+// dfs, bfs 공부하고 다시 풀기
 function solution(numbers, target) {
     var answer = 0;
     for(var i=0; i<numbers.length; i++) {
@@ -381,42 +382,11 @@ function solution(numbers, target) {
 </details>
 
 <details>
-<summary>lv2(프린터)</summary>
-<div markdown="1">
-
-``` javascript
-function solution(priorities, location) {
-    var answer = 0;
-    var count = 0;
-    while(true) {
-        var max = Math.max.apply(null, priorities)
-        count++
-        if(count == 10) {
-            break;
-        }
-        if(priorities[location] == max) {
-            return answer += 1
-        }
-        for(var i=priorities[location]; i<priorities.length; i++) {
-            if(priorities[location] < priorities[i]) {
-                answer += priorities.length-i
-                priorities.splice(i, priorities.length-i)
-                console.log(priorities)
-            }
-        }
-    }
-    return answer;
-}
-```
-
-</div>
-</details>
-
-<details>
 <summary>lv2(위장)</summary>
 <div markdown="1">
 
 ``` javascript
+// 순열 공부하고 다시 풀기
 function solution(clothes) {
     var answer = clothes.length;
     var hash = {};
@@ -518,12 +488,6 @@ function solution(n, words) {
 </div>
 </details>
 
-
-
-
-
-
-
 <details>
 <summary>lv2(큰 수 만들기)</summary>
 <div markdown="1">
@@ -531,6 +495,11 @@ function solution(n, words) {
 ``` javascript
 // 10번 테스트케이스 시간초과
 // 마지막 arr.join("")이 시간이 오래 걸리는거 같음
+
+// 다음에 풀때 풀 방식
+// 임시 배열을 만들어서 arr[i]이 arr[i+1]보다 높을때 break
+// arr[i] >= arr[i+1] 일때 temp.push(arr[i])
+// arr[i] < arr[i+1] 일때 count++ 하고 해당 arr[i]제거
 function solution(number, k) {
     var answer = '';
     var count = 0;
@@ -692,46 +661,6 @@ function solution(n) {
 </div>
 </details>
 
-<details>
-<summary>lv2(124 나라의 숫자)</summary>
-<div markdown="1">
-
-``` javascript
-
-// 1 1     11 42       21 144
-// 2 2     12 44       22 211
-// 3 4     13 111      23 212
-// 4 11    14 112      24 214
-// 5 12    15 114      25 221
-// 6 14    16 121      26 222
-// 7 21    17 122      27 224
-// 8 22    18 124      28 241
-// 9 24    19 141      29 242
-// 10 41   20 142      30 244
-
-function solution(n) {
-    var answer = '';
-    var arr = [4,1,2]
-    if(n<=3) {
-        answer += arr[n%3]
-        return answer
-    }
-    while(true) {
-        answer += arr[n%3]
-        n = Math.floor(n/3)
-        if(Math.floor(n/3) <= 1) {
-            answer += arr[n%3]
-            break;
-        }
-    }
-    var result = answer.split('').reverse().join('')
-    console.log(result)
-    return result;
-}
-```
-
-</div>
-</details>
 
 ### 막혔던 문제
 
@@ -980,6 +909,124 @@ function solution(skill, skill_trees) {
 </div>
 </details>
 
+<details>
+<summary>lv2(124 나라의 숫자)</summary>
+<div markdown="1">
+
+``` javascript
+
+// 못푼 이유
+// n의 값이 12이하일때 answer를 구하는 법을 찾지 못했음
+
+// 해결법
+// n:30이 answer:244가 만들어지는 과정을 일일히 써봄
+// n == 30일때 n값 변화
+// 1. (30-3)/3 => 9 ----> answer == '4'
+// 2. (9-3)/3 => 2 ----> answer == '44'
+// 3. 2일때는 if(n<=3)조건에 의해 ----> answer == '442'
+
+// 틀린 코드
+// 1 1     11 42       21 144
+// 2 2     12 44       22 211
+// 3 4     13 111      23 212
+// 4 11    14 112      24 214
+// 5 12    15 114      25 221
+// 6 14    16 121      26 222
+// 7 21    17 122      27 224
+// 8 22    18 124      28 241
+// 9 24    19 141      29 242
+// 10 41   20 142      30 244
+
+function solution(n) {
+    var answer = '';
+    var arr = [4,1,2]
+    if(n<=3) {
+        answer += arr[n%3]
+        return answer
+    }
+    while(true) {
+        answer += arr[n%3]
+        n = Math.floor(n/3)
+        if(Math.floor(n/3) <= 1) {
+            answer += arr[n%3]
+            break;
+        }
+    }
+    var result = answer.split('').reverse().join('')
+    console.log(result)
+    return result;
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>lv2(프린터)</summary>
+<div markdown="1">
+
+``` javascript
+
+// 못푼 이유
+// 상황마다 location위치를 어떻게 처리해야 할지 몰랐음
+
+// 해결법
+// 임시 배열에 priorities 내림차순한 배열 임시 저장
+// (if문) - priorities[0]번째 값과 내림차순[cnt]값(중요도가 높은순)이 같을때 인쇄
+// (else문) - priorities[0]번째 값 맨뒤로 보내고 location값 = location-1
+//            location < 0 이 되는순간 priorities.length-1로 바꿈
+//            (그 이유는 해당 location 차례가 되었는데 중요도가 높은게 있기 때문에 맨뒤로 가기 때문)
+// location이 0이면서 중요도가 제일 높을때 cnt값 return
+
+// 틀린 코드
+function solution(priorities, location) {
+    var answer = 0;
+    var count = 0;
+    while(true) {
+        var max = Math.max.apply(null, priorities)
+        count++
+        if(count == 10) {
+            break;
+        }
+        if(priorities[location] == max) {
+            return answer += 1
+        }
+        for(var i=priorities[location]; i<priorities.length; i++) {
+            if(priorities[location] < priorities[i]) {
+                answer += priorities.length-i
+                priorities.splice(i, priorities.length-i)
+                console.log(priorities)
+            }
+        }
+    }
+    return answer;
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>lv2(쇠막대기)</summary>
+<div markdown="1">
+
+``` javascript
+
+// 못푼 이유
+// 문제를 이해 못함
+
+// 해결법
+// ')'이 나올때 쇠막대기 조각 만들어지는 개수
+// [0], [3, 3, 2, 3, 2, 1, 0(막대 마지막이므로 1)], [1, 0(막대 마지막이므로 1)]
+// 스택을 이용해서 풀면됌
+
+// 틀린 코드
+// 못풀어서 없음
+```
+
+</div>
+</details>
+
 ### lv1 푼 문제
 
 #### 일반
@@ -1048,6 +1095,9 @@ function solution(skill, skill_trees) {
 18. 짝지어 제거하기
 19. 올바른 괄호
 20. 스킬트리
+21. 124 나라의 숫자
+22. 프린터
+23. 쇠막대기
 
 ### lv2 질문하기 참고해서 푼문제
 - 카펫(테스트 케이스4,6,7 참고) - 노란색 격자의 가로가 긴 경우로 해결해야됌
@@ -1061,6 +1111,8 @@ function solution(skill, skill_trees) {
 - 튜플 - {} 안의 숫자 갯수를 구하는 부분 참고
 - H-Index - 배열값을 내림차순하고 인용횟수를 이용하는 부분 참고
 - 짝지어 제거하기 - 임시 배열을 만들어서 비교하면서 stack을 이용해서 빼는 부분 참고
+- 프린터 - 다른 사람 풀이봄
+- 쇠막대기 - 다른 사람 풀이봄
 
 
 ### lv3 질문하기 참고해서 푼 문제
