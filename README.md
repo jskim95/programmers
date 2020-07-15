@@ -354,6 +354,11 @@ function solution(numbers) {
 
 ``` javascript
 // dfs, bfs 공부하고 다시 풀기
+// -1+1+1+1+1 = 3
+// +1-1+1+1+1 = 3
+// +1+1-1+1+1 = 3
+// +1+1+1-1+1 = 3
+// +1+1+1+1-1 = 3
 function solution(numbers, target) {
     var answer = 0;
     for(var i=0; i<numbers.length; i++) {
@@ -481,51 +486,6 @@ function solution(n, words) {
     answer[0] = 0
     answer[1] = 0
     return answer
-}
-
-```
-
-</div>
-</details>
-
-<details>
-<summary>lv2(큰 수 만들기)</summary>
-<div markdown="1">
-
-``` javascript
-// 10번 테스트케이스 시간초과
-// 마지막 arr.join("")이 시간이 오래 걸리는거 같음
-
-// 다음에 풀때 풀 방식
-// 임시 배열을 만들어서 arr[i]이 arr[i+1]보다 높을때 break
-// arr[i] >= arr[i+1] 일때 temp.push(arr[i])
-// arr[i] < arr[i+1] 일때 count++ 하고 해당 arr[i]제거
-function solution(number, k) {
-    var answer = '';
-    var count = 0;
-    var stop = 0;
-    var arr = number.split("")
-
-    while(k>0) {
-        stop++
-        if(count == k) {
-            break;
-        } else if(stop > k) {
-            var num = k-count
-            var a = arr.splice(arr.length-num, num)
-            break;
-        }
-
-        for(var i=0; i<arr.length-1; i++) {
-            if(arr[i]<arr[i+1]) {
-                count++
-                arr.splice(i,1)
-                break;
-            }
-        }
-    }
-    answer = arr.join("")
-    return answer;
 }
 
 ```
@@ -1027,6 +987,53 @@ function solution(priorities, location) {
 </div>
 </details>
 
+<details>
+<summary>lv2(큰 수 만들기)</summary>
+<div markdown="1">
+
+``` javascript
+// 못푼 이유
+// 시간 초과
+
+// 해결법
+// 1. 가장 큰 수를 담을 임시 배열stack 생성
+// 2. number 배열에서 차례로 꺼내면서 stack에 쌓인 값과 비교하여 stack push or pop
+// 3. 끝까지 비교해도 k가 남아있으면 마지막 배열부터 제거
+
+// 틀린 코드
+function solution(number, k) {
+    var answer = '';
+    var count = 0;
+    var stop = 0;
+    var arr = number.split("")
+
+    while(k>0) {
+        stop++
+        if(count == k) {
+            break;
+        } else if(stop > k) {
+            var num = k-count
+            var a = arr.splice(arr.length-num, num)
+            break;
+        }
+
+        for(var i=0; i<arr.length-1; i++) {
+            if(arr[i]<arr[i+1]) {
+                count++
+                arr.splice(i,1)
+                break;
+            }
+        }
+    }
+    answer = arr.join("")
+    return answer;
+}
+
+```
+
+</div>
+</details>
+
 ### lv1 푼 문제
 
 #### 일반
@@ -1098,6 +1105,10 @@ function solution(priorities, location) {
 21. 124 나라의 숫자
 22. 프린터
 23. 쇠막대기
+24. 큰 수 만들기
+
+### lv3 푼 문제
+1. 타일 장식물
 
 ### lv2 질문하기 참고해서 푼문제
 - 카펫(테스트 케이스4,6,7 참고) - 노란색 격자의 가로가 긴 경우로 해결해야됌
@@ -1113,6 +1124,7 @@ function solution(priorities, location) {
 - 짝지어 제거하기 - 임시 배열을 만들어서 비교하면서 stack을 이용해서 빼는 부분 참고
 - 프린터 - 다른 사람 풀이봄
 - 쇠막대기 - 다른 사람 풀이봄
+- 큰 수 만들기 - 다른 사람 풀이참고(시간초과를 해결못함)
 
 
 ### lv3 질문하기 참고해서 푼 문제
