@@ -353,6 +353,9 @@ function solution(numbers) {
 <div markdown="1">
 
 ``` javascript
+// taget/number 하고 몫 만큼 +, - 계산하기
+// ex)
+// 3/1 == 3 이므로 순수 +3개, (+, -)0개 되게 만들기
 // dfs, bfs 공부하고 다시 풀기
 // -1+1+1+1+1 = 3
 // +1-1+1+1+1 = 3
@@ -621,6 +624,51 @@ function solution(n) {
 </div>
 </details>
 
+<details>
+<summary>lv3(야근 지수)</summary>
+<div markdown="1">
+
+``` javascript
+// 555 4
+// (344) 9, 16, 16 => 41
+// (335) 9, 9 25 =>  43
+
+// 풀이
+// 1. works배열 내림차순 (제곱할때 큰값부터 -1 해야 최솟값이 나올꺼 같아서)
+// 2. works배열 요소가 0과 같거나 작으면 continue로 넘기고 큰 경우는 -1 해주기
+// 3. n == 0 이면 각 works요소 제곱하고 answer return
+
+function solution(n, works) {
+    var answer = 0;
+    works.sort(function (a, b) {
+        return b-a;
+    })
+    while(n>0) {
+
+        for(var i=0; i<works.length; i++) {
+            n--
+            if(works[i]>0) {
+                works[i] = works[i]-1
+                if(n == 0) {
+                    break
+                }
+            } else {
+                continue;
+            }
+        }
+        if(n==0) {
+            for(var j=0; j<works.length; j++) {
+                answer += works[j]*works[j]
+            }
+            return answer
+        }
+    }
+    return answer;
+}
+```
+
+</div>
+</details>
 
 ### 막혔던 문제
 
