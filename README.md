@@ -184,7 +184,25 @@ console.log(num.toFixed(2)) // 99.56
 <summary>substring</summary>
 <div markdown="1">
 
-```
+```javascript
+
+var str = '123456789';
+
+// --------------------------------- substring ---------------------------------
+// string.substring(start, end) - start인덱스 부터 end인덱스-1 까지 출력함
+// string.substring(start) - start부터 마지막 인덱스 까지
+
+console.log(str.substring(1,4)) // 234
+console.log(str.substring(0)) // 123456789
+console.log(str) // 123456789
+
+// --------------------------------- substr ---------------------------------
+// string.substr(start, end) - start인덱스 부터 end인덱스-1 까지 출력함
+// string.substr(start) - start부터 마지막 인덱스 까지
+console.log(str.substr(0,4)) // 1234
+console.log(str.substr(5)) // 6789
+console.log(str) // 123456789
+
 
 ```
 
