@@ -224,7 +224,30 @@ console.log(str) // 123456789
 <summary>아스키코드</summary>
 <div markdown="1">
 
-```
+``` javascript
+// 아스키 코드표
+// https://m.blog.naver.com/PostView.nhn?blogId=diceworld&logNo=220175224345&proxyReferer=https:%2F%2Fwww.google.com%2F
+  1. 자바스크립트 charCodeAt 사용방법 (문자열을 아스키 코드로 변환)
+  "문자열".charCodeAt([문자열 자릿수]);
+
+  2. 자바스크립트 fromCharCode 사용방법 (아스키코드를 문자열로 변환)
+  "문자열".fromCharCode([아스키코드값]);
+
+  
+
+  var str = '123456789';
+  // --------------------------------- 문자열을 아스키 코드로 변환 ---------------------------------
+  console.log(str.charCodeAt([0])) // 49
+  console.log(str.charCodeAt([8])) // 57
+  console.log(str.charCodeAt([9])) // NaN
+
+  // --------------------------------- 아스키코드를 문자열로 변환 ---------------------------------
+  console.log(String.fromCharCode(89)) // Y
+  console.log(String.fromCharCode(65, 83, 67, 73, 73)) // ASCII
+
+
+
+
 
 ```
 
