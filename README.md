@@ -12,6 +12,40 @@ arr.sort(function (a,b){ return a-b; }) // [ 1, 3, 5, 7, 13, 21, 44 ]
 
 2. 내림차순
 arr.sort(function (a,b){ return b-a; }) // [ 44, 21, 13, 7, 5, 3, 1 ]
+
+3. 문자열 길이순
+var arr1 = ['orange', 'apple', 'banananananas', 'unwatch', 'star', 'a']
+
+arr1.sort(function lengthSort(a, b) {
+  return a.length - b.length;
+})
+
+console.log(arr1) // [ 'a', 'star', 'apple', 'orange', 'unwatch', 'banananananas' ]
+
+4. a의 위치에 따라 정렬
+var arr2 = ['orange', 'apple', 'unwatch', 'star', 'a','nnnnnnna']
+
+arr2.sort(function positionSort(a, b) {
+  return a.indexOf("a") - b.indexOf('a')
+})
+console.log(arr2) // [ 'apple', 'a', 'orange', 'star', 'unwatch', 'nnnnnnna' ]
+
+5. 객체 속성의 개수에 따라 정렬
+var obj = [
+  {prop1:1, prop2:2,},
+  {prop1:1, prop2:2, prop3:3, prop4:4, prop5:5, },
+  {prop:1, }
+]
+
+obj.sort(function keyLengthSort(a, b) {
+  return Object.keys(a).length - Object.keys(b).length;
+})
+console.log(obj)
+// [
+//   { prop: 1 },
+//   { prop1: 1, prop2: 2 },
+//   { prop1: 1, prop2: 2, prop3: 3, prop4: 4, prop5: 5 }
+// ]
 ```
 
 </div>
@@ -280,8 +314,17 @@ console.log(str) // 123456789
 <summary>reverse</summary>
 <div markdown="1">
 
-```
+```javascript
+// 배열.reverse() => (O)
+// 문자열.reverse() => (X)
+// 숫자.reverse() => (X)
+var a = 'hello'
+var b = [1, 2, 3, 4, 5]
+var c = 12345
 
+console.log(a.reverse()) // TypeError: a.reverse is not a function
+console.log(b.reverse()) // [ 5, 4, 3, 2, 1 ]
+console.log(c) // TypeError: c.reverse is not a function
 ```
 
 </div>
