@@ -303,7 +303,28 @@ console.log(str) // 123456789
 <summary>slice, splice</summary>
 <div markdown="1">
 
-```
+``` javascript
+var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+var arr1 = arr.slice(3, 5); // [4, 5]
+var arr2 = arr.slice(undefined, 5); // [1, 2, 3, 4, 5]
+var arr3 = arr.slice(-3); // [8, 9, 10]
+var arr4 = arr.slice(-3, 9); // [8, 9]
+var arr5 = arr.slice(10); // []
+var arr6 = arr.slice(4); // [5, 6, 7, 8, 9, 10]
+var arr7 = arr.slice(undefined); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+var arr8 = arr.slice(5, -4); // [6]
+var arr9 = arr.slice(2, 15); // [3, 4, 5, 6, 7, 8, 9, 10]
+console.log(arr); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+console.log(arr1); // [4, 5]
+console.log(arr2); // [1, 2, 3, 4, 5]
+console.log(arr3); // [8, 9, 10]
+console.log(arr4); // [8, 9]
+console.log(arr5); // []
+console.log(arr6); // [5, 6, 7, 8, 9, 10]
+console.log(arr7); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+console.log(arr8); // [6]
+console.log(arr9); // [3, 4, 5, 6, 7, 8, 9, 10]
 
 ```
 
