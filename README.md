@@ -326,6 +326,79 @@ console.log(arr7); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 console.log(arr8); // [6]
 console.log(arr9); // [3, 4, 5, 6, 7, 8, 9, 10]
 
+
+
+start: 배열의 변경을 시작할 인덱스.
+음수를 지정한 경우: 배열의 끝에서부터 요소를 센다.
+배열의 길이보다 큰 수를 지정한 경우: 실제 시작 인덱스는 배열의 길이로 설정
+절대값이 배열의 길이보다 큰 경우: 0으로 세팅
+
+
+deleteCount: 배열에서 제거할 요소의 수.
+생략 / 값이 array.length - start보다 큰 경우: start부터의 모든 요소를 제거.
+0 이하의 수를 지정: 어떤 요소도 제거되지 않는다.
+
+
+item1, item2, ... : 배열에 추가할 요소.
+- 지정하지 않는 경우: splice()는 요소 제거만 수행한다.
+
+
+반환값: 제거한 요소를 담은 배열.
+- 아무 값도 제거하지 않았으면 빈 배열을 반환한다.
+
+
+var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+var arr1 = arr.splice(10, 2, 'a', 'b', 'c');
+
+console.log(arr);   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "a", "b", "c"]
+console.log(arr1);  // [11, 12]
+
+
+
+
+
+
+var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+var arr1 = arr.splice(-6, 4);
+
+console.log(arr);   // [1, 2, 3, 4, 5, 6, 11, 12]
+console.log(arr1);  // [7, 8, 9, 10]
+
+
+
+
+
+var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+var arr1 = arr.splice(-13, 1);
+
+console.log(arr);   // [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+console.log(arr1);  // [1]
+
+
+
+
+
+
+var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+var arr1 = arr.splice(3);
+console.log(arr);   // [1, 2, 3]
+console.log(arr1);  // [4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+var arr2 = arr1.splice(6, 4);
+console.log(arr1);  // [4, 5, 6, 7, 8, 9]
+console.log(arr2);  // [10, 11, 12]
+
+
+
+
+
+var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+var arr1 = arr.splice(5, 0, 'add');
+
+console.log(arr);   // [1, 2, 3, 4, 5, "add", 6, 7, 8, 9, 10, 11, 12]
+console.log(arr1);  // []
+
 ```
 
 </div>
